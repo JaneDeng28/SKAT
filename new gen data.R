@@ -33,7 +33,7 @@ gen_data_new2 <- function(nn, prev=0.2, a0_cov,
                          m1, m0, s1, s0, label.size=100, rho = 0.3){
   
   # Fix prevalence of the outcome.
-  y <- rbinom(nn, 1, prev)
+  # y <- rbinom(nn, 1, prev)
   
   # Generate covariates.
   tmp.mean <- VTM(a0_cov[1, ], nn) + y * VTM(a0_cov[2, ], nn)
@@ -53,7 +53,8 @@ gen_data_new2 <- function(nn, prev=0.2, a0_cov,
   vcf = readVCF( vcf_file, maxNumberOfVariants = 500  , min_maf = 0.01, max_maf = 1)
   startSimulation(vcf, totalNumberOfIndividuals = nn)
   ids = generateUnrelatedIndividuals(nsim)
-  g = retrieveGenotypes(ids)
+  G = retrieveGenotypes(ids)
+  Y = rbinom(nn,size=1,prob=G*(b.G[1]+c(G%*%b.G[-1])))
   
   # Generate surrogates.
   s = rep(NA, nn)
