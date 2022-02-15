@@ -27,9 +27,8 @@ gen_data_new3 = function(label.size, m1, m0, s1, s0){
   s[y == 0] <- rnorm(n = sum(1-y), mean = m0, sd = s0)
   # Return data
   my_dat <- cbind(y, x, g, s)
-  colnames(my_dat) <- c("Y", paste0("X", 1:ncol(x)),
-                        paste0("G",1:ncol(g)),
-                        "S")
+  colnames(my_dat) <- c("Y", "X", "G", "S")  # this line need revise
+  # I think X and G from example data set is ready for dataframe, but error occur
   return(list(my_dat = my_dat, id.t = id.t))
 }
 
@@ -41,7 +40,7 @@ m0 = 1
 s1 = 0.5
 s0 = 0.6
 set.seed(001)
-# Have problem with creating my_dat dataframe in correct format
+
 dat.obj = gen_data_new3(label.size = n_lab, m1, m0, s1, s0)
 dat = dat.obj$my_dat
 id.t = dat.obj$id.t
