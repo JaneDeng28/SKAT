@@ -19,6 +19,7 @@ gen_data_new3 = function(label.size, m1, m0, s1, s0){
   nn = length(y)
   # Lable ids
   id.t = sample(1:nn, label.size)
+  # not sure
   # Generate surrogates
   s = rep(NA, nn)
   s[y == 1] <- rnorm(n = sum(y), mean = m1, sd = s1)
